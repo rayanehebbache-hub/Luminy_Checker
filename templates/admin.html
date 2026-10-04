@@ -1,0 +1,63 @@
+{% include "header.html" %}
+
+<main>
+  <h1>Panneau admin</h1>
+  <form method="POST" action="{{ url_for('admin_panel_post') }}">
+    <input type="text" name="email" placeholder="Email" required />
+    <button type="submit">Rechercher</button>
+  </form>
+  {% if user_found %}
+    <p>{{ user_found['username'] }} (role : {{ user_found['role'] }})</p>
+    <h2>Derniers signalements</h2>
+    <!-- | est un filtre jinja, ici, on utilise length pour
+    s'assurer que la liste d'affluence de l'utilisateur n'est
+    pas vide-->
+    <!-- filtre jinja: fonction que l'on applique pour
+    transformer/extraire une info-->
+    {% if affluences and affluences|length > 0 %}
+      <ul>
+        {% for a in affluences %}
+          <li>
+            {{ a['timestamp'] }} — {{ a['place_name'] }} : {{ a['niveau'] }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Aucun signalement</p>
+    {% endif %}
+    {% if user_found['role'] == 'user' and user_found['id'] != session['user_id'] %}
+      <form method="POST" action="{{ url_for('admin_action', user_id=user_found['id']) }}">
+        {% if user_found['banned'] == 1 %}
+          <button type="submit">Débannir</button>
+        {% else %}
+          <button type="submit">Bannir</button>
+        {% endif %}
+      </form>
+    {% elif user_found['id'] == session['user_id'] %}
+      <p>Impossible de se bannir soi-même</p>
+    {% else %}
+      <p>Impossible de bannir ce membre ({{ user_found['role'] }})</p>
+    {% endif %}
+    {% if user_found['id'] != session['user_id'] %}
+      {% if user_found['role'] != 'admin' %}
+        <form method="POST" action="{{ url_for('admin_set_role', user_id=user_found['id']) }}">
+          <label for="role">Rôle :</label>
+          <select name="role" id="role" required>
+            <option value="user" {% if user_found['role'] == 'user' %}selected{% endif %}>user</option>
+            <option value="staff" {% if user_found['role'] == 'staff' %}selected{% endif %}>staff</option>
+            <option value="admin">admin</option>
+          </select>
+          <button type="submit">Mettre à jour le rôle</button>
+        </form>
+      {% else %}
+        <p>Impossible de modifier le rôle d'un autre admin</p>
+      {% endif %}
+    {% else %}
+      <p>Impossible de modifier votre propre rôle</p>
+    {% endif %}
+  {% elif user_found is not none %}
+    <p>L'utilisateur n'existe pas</p>
+  {% endif %}
+</main>
+
+{% include "footer.html" %}

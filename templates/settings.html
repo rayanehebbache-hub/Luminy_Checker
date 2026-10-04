@@ -1,0 +1,42 @@
+{% include "header.html" %}
+
+<main class="settings-page">
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message-box">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h2>Changer le mot de passe</h2>
+    <form method="POST" action="/settings/change_password">
+        <label for="current">Mot de passe actuel</label>
+        <input type="password" name="current_password" id="current" required>
+
+        <label for="new">Nouveau mot de passe</label>
+        <input type="password" name="new_password" id="new" required>
+        <p class="field-help">Au moins 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</p>
+
+        <label for="confirm">Confirmer le mot de passe</label>
+        <input type="password" name="confirm_password" id="confirm" required>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+
+    <form action="/export_data" method="get">
+        <button type="submit">Télécharger mes données (JSON)</button>
+    </form>
+
+    <form action="/delete_user" method="POST">
+        <button
+            type="submit"
+            class="button-danger"
+            onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')">
+            Supprimer mon compte
+        </button>
+    </form>
+</main>
+
+{% include "footer.html" %}

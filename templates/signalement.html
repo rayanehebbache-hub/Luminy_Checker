@@ -1,0 +1,25 @@
+{% include 'header.html' %}
+
+<h1>Signaler une affluence</h1>
+
+<form action="/signaler" method="post">
+  <label for="place_id">ID du lieu :</label>
+  <input type="number" id="place_id" name="place_id" required />
+
+  <br /><br />
+
+  <label for="niveau">Niveau d'affluence :</label>
+  <select id="niveau" name="niveau" required>
+    <option value="vide">vide</option>
+    <option value="faible">faible</option>
+    <option value="moyen">moyen</option>
+    <option value="moyen plus">moyen plus</option>
+    <option value="fort">fort</option>
+  </select>
+
+  <br /><br />
+
+  <button type="submit">Envoyer</button>
+</form>
+
+{% include 'footer.html' %}

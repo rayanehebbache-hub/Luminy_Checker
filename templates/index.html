@@ -1,0 +1,30 @@
+{% include "header.html" %}
+
+<main class="home-page">
+  {% if 'user_id' in session %}
+  <section class="home">
+    <h1>Bienvenue {{ session['username'] }} !</h1>
+    <p>
+      Il s'agit d'une application dont le but est de vous permettre de gagner du
+      temps lors de vos différents trajets sur le campus.
+    </p>
+    {% if user_role == 'admin' %}
+    <p><a href="/admin">Bannir ou débannir un utilisateur</a></p>
+    {% endif %} {% if user_role == 'staff'%}
+    <p><a href="/menu/edit">Modifier le menu RU</a></p>
+    {% endif %}
+    <p><a href="/menu">Voir le menu du restaurant universitaire</a></p>
+    <p><a href="/computers">Prendre un PC à la BU</a></p>
+  </section>
+  {% else %}
+  <section class="home">
+    <h1>Bienvenue sur Luminy Checker</h1>
+    <p>
+      Il s'agit d'une application dont le but est de vous permettre de gagner du
+      temps lors de vos différents trajets sur le campus.
+    </p>
+  </section>
+  {% endif %}
+</main>
+
+{% include "footer.html" %}

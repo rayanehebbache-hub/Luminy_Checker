@@ -1,0 +1,10 @@
+    <footer>
+      <div class="footer-inner">
+        <span>Affluence Campus - Université</span>
+        {% if session.get('user_id') %}
+          <a href="{{ url_for('settings') }}">- Paramètres</a>
+        {% endif %}
+      </div>
+    </footer>
+  </body>
+</html>

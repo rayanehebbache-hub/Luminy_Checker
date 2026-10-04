@@ -1,0 +1,16 @@
+{% include "header.html" %}
+
+<main>
+  <h1>Menu du restaurant universitaire</h1>
+
+  {% if menu %}
+  <pre>{{ menu['content'] }}</pre>
+  <p>Dernière mise à jour : {{ menu['updated_at'] }}</p>
+  {% else %}
+  <p>Menu indisponible.</p>
+  {% endif %} {% if user_role in ['staff', 'admin'] %}
+  <p><a href="/menu/edit">Modifier le menu</a></p>
+  {% endif %}
+</main>
+
+{% include "footer.html" %}

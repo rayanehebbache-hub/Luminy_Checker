@@ -1,0 +1,399 @@
+﻿/*
+ici on definis des variable que l'on va utiliser par la
+suite, par ex. on aura regulierement sur notre site les
+memes ombres donc on defnis un variable shadow qu'on pourra
+reutiliser a chaque fois avec var(--shadow);
+*/
+:root {
+  --border: #d7e2ef;
+  --shadow: 0 18px 40px rgba(17, 35, 63, 0.08);
+}
+
+/*
+* pour selectionner absolument tous les elements
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", sans-serif;
+  background: #edf4fb;
+  color: black;
+}
+
+a {
+  color: #0055a4;
+  text-decoration: none;
+}
+
+/*
+hover pour appliquer un style a un element uniquement lorsqu'on
+passe notre souris dessus
+*/
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(215, 226, 239, 0.9);
+  box-shadow: 0 12px 30px rgba(17, 35, 63, 0.06);
+}
+
+.header-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: 88px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  flex: 0 0 auto;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.search-form,
+.header-nav,
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-form {
+  flex: 1 1 420px;
+  justify-content: center;
+}
+
+.header-actions {
+  flex: 0 0 auto;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.header-nav {
+  color: #62748c;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.header-nav a {
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/*
+input[type="text"] pour appliquer un style uniquement au
+inut dont l'attibut type vaut "text"
+*/
+header input[type="text"] {
+  min-width: 320px;
+  max-width: 520px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #7fa8d7;
+  box-shadow: 0 0 0 4px rgba(0, 85, 164, 0.16);
+}
+
+button {
+  padding: 11px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: #0055a4;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background: #003d77;
+  transform: translateY(-1px);
+}
+
+.header-logout {
+  flex: 0 0 auto;
+}
+
+main {
+  width: min(1120px, calc(100% - 32px));
+  margin: 32px auto 48px;
+  flex: 1;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  width: min(760px, 100%);
+  padding: 36px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    #f8fbff 100%
+  );
+  box-shadow: var(--shadow);
+}
+
+.home p {
+  margin: 0 auto 14px;
+  max-width: 620px;
+}
+
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  width: min(720px, 100%);
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    #f8fbff 100%
+  );
+  box-shadow: var(--shadow);
+}
+
+/*
+> pour prendre les elements juste en dessous de lui dans la
+hierarchie (pas plus profond)
+*/
+.auth-card > a {
+  display: inline-block;
+  margin-top: 18px;
+  font-weight: 600;
+}
+
+.message-box {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid #c9d9ee;
+  border-radius: 12px;
+  background: #edf4fd;
+  color: #17406d;
+}
+
+.field-help {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: #62748c;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+}
+
+main > p,
+main > form,
+main > ul,
+main > pre {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+main > p,
+main > pre {
+  padding: 22px;
+}
+
+main > ul {
+  padding: 18px;
+}
+
+main > form {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 28px;
+}
+
+main > form + a,
+main > a {
+  display: inline-block;
+  margin-top: 16px;
+}
+
+li {
+  background: #f8fbff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 8px;
+  font-weight: 600;
+}
+
+form {
+  margin: 0;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 -8px 24px rgba(17, 35, 63, 0.03);
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #62748c;
+}
+
+.button-danger {
+  background: #d64545;
+}
+
+.button-danger:hover {
+  background: #b93434;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.row img {
+  width: 150px;
+  height: 150px;
+}
+
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 60vh;
+}
+
+/*
+gestion de la partie responsive du site (quand la largeur
+de l'ecran est de 780 pixels ou moins)
+*/
+@media (max-width: 780px) {
+  /*
+  wrap avec flex pour que les elements se deplace en bas
+  lorsqu'on reduit trop la taille de l'ecran
+  */
+  .header-inner {
+    padding: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /*
+  order pour controller l'ordre d'affichage des elements dans
+  le site.
+  ex. un element order: 3 sera apres un element order: 1
+  (on rearange les elements lorque l'ecran deviens plus petit)
+  */
+  .search-form {
+    width: 100%;
+    order: 3;
+  }
+
+  .search-form input[type="text"] {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .header-nav {
+    justify-content: center;
+  }
+
+  main {
+    width: min(100% - 24px, 1120px);
+    margin-top: 24px;
+  }
+
+  main > form {
+    width: 100%;
+    padding: 22px;
+  }
+
+  .auth-card {
+    padding: 24px;
+  }
+
+  .home {
+    padding: 24px;
+  }
+}

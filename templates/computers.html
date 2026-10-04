@@ -1,0 +1,48 @@
+{% include "header.html" %}
+
+<main>
+  <h1>Prise de PC disponibles</h1>
+  <div class="row" id="row-1">
+    {% for pc in computers[0:6] %}
+      <div class="pc-wrapper">
+        <!-- les attributs prefixe de data- deviennent
+        accessible dans JS via .dataset -->
+        <img class="pc"
+          src="{{ url_for('static', filename='computer_bu_pic.png') }}"
+          id="pc-{{ pc['id'] }}"
+          data-id="{{ pc['id'] }}"
+          data-user="{{ pc['user_id'] if pc['user_id'] else '' }}"
+          alt="{{ pc['name'] }}">
+        <p class="pc-name">{{ pc['name'] }}</p>
+        {% if pc['user_id'] is none %}
+          <!-- cas ou l'on peut prendre un pc (on
+          n'occupe pas un pc)-->
+          <button data-id="{{ pc['id'] }}">Prendre</button>
+        {% elif pc['user_id'] == user_id %}
+          <!-- cas ou l'on occupe deja un pc-->
+          <button data-id="{{ pc['id'] }}">Libérer</button>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="row" id="row-2">
+    {% for pc in computers[6:12] %}
+      <div class="pc-wrapper">
+        <img class="pc"
+          src="{{ url_for('static', filename='computer_bu_pic.png') }}"
+          id="pc-{{ pc['id'] }}"
+          data-id="{{ pc['id'] }}"
+          data-user="{{ pc['user_id'] if pc['user_id'] else '' }}"
+          alt="{{ pc['name'] }}">
+        <p class="pc-name">{{ pc['name'] }}</p>
+        {% if pc['user_id'] is none %}
+          <button data-id="{{ pc['id'] }}">Prendre</button>
+        {% elif pc['user_id'] == user_id %}
+          <button data-id="{{ pc['id'] }}">Libérer</button>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</main>
+
+{% include "footer.html" %}

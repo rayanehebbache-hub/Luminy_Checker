@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='checker.js') }}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Affluence Campus</title>
+  </head>
+  <!-- on stocke dans body l'id de l'utilisateur que l'on
+  pourra recuperer ensuite avec JS -->
+  <body {% if session.get('user_id') %}data-user-id="{{ session.get('user_id') }}"{% endif %}>
+    <header>
+      <div class="header-inner">
+        <a href="/" class="brand">Affluence Campus</a>
+
+        <form action="/affluence" method="get" class="search-form">
+          <input type="text" name="place" placeholder="Nom du lieu" />
+          <button type="submit">Rechercher</button>
+        </form>
+
+        <div class="header-actions">
+          <!-- on indique quoi afficher en fonction de si
+          l'utilisateur est connecte ou nom via session de
+          Flask -->
+          {% if session.get('user_id') %}
+          <nav class="header-nav">
+            <a href="/affluence?place_id=1">Signaler une affluence</a>
+          </nav>
+          <form action="/logout" method="POST" class="header-logout">
+            <button type="submit">Se déconnecter</button>
+          </form>
+          {% else %}
+          <nav class="header-nav">
+            <a href="/login">Se connecter</a>
+            <a href="/new_user">Créer un compte</a>
+          </nav>
+          {% endif %}
+        </div>
+      </div>
+    </header>

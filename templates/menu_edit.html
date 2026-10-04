@@ -1,0 +1,15 @@
+﻿{% include "header.html" %}
+
+<main>
+  <h1>Modifier le menu RU</h1>
+
+  <form method="POST" action="/menu/edit">
+    <label for="content">Contenu :</label>
+    <br />
+    <textarea id="content" name="content" rows="10" cols="60" required>{% if menu %}{{ menu['content'] }}{% endif %}</textarea>
+    <br />
+    <button type="submit">Enregistrer</button>
+  </form>
+</main>
+
+{% include "footer.html" %}

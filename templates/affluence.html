@@ -1,0 +1,52 @@
+{% include "header.html" %}
+
+<main>
+    <h1>Affluence des lieux du campus</h1>
+    {% if error_message %}
+        <p class="message-box">{{ error_message }}</p>
+    {% endif %}
+    {% if user_banned == 1 %}
+        <p>Vous êtes banni, vous ne pouvez pas signaler d'affluence</p>
+    {% endif %}
+    {% if affluence %}
+        <ul>
+        {% for place in affluence %}
+            <li>
+                <p>{{ place['name'] }}</p>
+
+                {% if place['niveau'] %}
+                    Moyenne (10 min) : {{ place['niveau'] }}
+                {% else %}
+                    Niveau inconnu
+                {% endif %}
+                {% if 'user_id' in session %}
+                    {% if user_banned != 1 %}
+                        <form action="/signaler" method="POST">
+                            <input type="hidden" name="place_id" value="{{ place['id'] }}">
+
+                            <select name="niveau" required>
+                                <option value="">Choisir</option>
+                                <option value="vide">Vide</option>
+                                <option value="faible">Faible</option>
+                                <option value="moyen">Moyen</option>
+                                <option value="fort">Fort</option>
+                                <option value="plein">Plein</option>
+                            </select>
+
+                            <button type="submit">Signaler</button>
+                        </form>
+                    {% endif %}
+
+                {% else %}
+                    <p>(Connecte-toi pour signaler)</p>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun lieu trouvé</p>
+    {% endif %}
+</main>
+
+{% include "footer.html" %}
